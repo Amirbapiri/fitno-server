@@ -78,22 +78,25 @@ const httpGetUserData = async (req, res) => {
 }
 
 const httpUpdateUserData = async (req, res) => {
-  const { firstName, lastName, trainingPlanPrice, dietPlanPrice } = req.body;
-  // const buffer = await sharp(req.file.buffer).toBuffer();
+  // const { firstName, lastName, trainingPlanPrice, dietPlanPrice } = req.body;
+  // // const buffer = await sharp(req.file.buffer).toBuffer();
   try {
-    const existingUser = await Coach.findById(req.user);
-    const user = new Coach({
-      _id: req.user,
-      phoneNumber: existingUser.phoneNumber,
-      password: existingUser.password,
-      firstName,
-      lastName,
-      trainingPlanPrice,
-      dietPlanPrice,
-    });
-    await Coach.updateOne({ _id: req.user }, user);
-    return res.status(204).json();
+  //   const existingUser = await Coach.findById(req.user);
+  //   const user = new Coach({
+  //     _id: req.user,
+  //     phoneNumber: existingUser.phoneNumber,
+  //     password: existingUser.password,
+  //     firstName,
+  //     lastName,
+  //     trainingPlanPrice,
+  //     dietPlanPrice,
+  //   });
+  //   await Coach.updateOne({ _id: req.user }, user);
+  //   return res.status(204).json(); 
+  const updatedCoach = await Coach.updateCoach(req.user, req.body);
+  return res.status(204).json();
   } catch (e) {
+    console.log(e);
     return res.status(400).json({ msg: "Error in updating profile." });
   }
 }

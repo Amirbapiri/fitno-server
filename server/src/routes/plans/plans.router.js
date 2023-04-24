@@ -14,7 +14,6 @@ const uploadMiddleWare = multer({
 });
 
 
-// plansRouter.post("/training/send", auth, uploadMiddleWare.single("trainingPlan"), httpPostSendTrainingPlan);
 plansRouter.get("/:requestId", auth, httpGetWorkoutPlan);
 plansRouter.post("/:requestId/create", auth, httpCreateWorkoutPlan);
 plansRouter.get("/:planId/delete", auth, httpDeletePlanById);

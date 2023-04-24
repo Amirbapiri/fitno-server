@@ -63,13 +63,25 @@ coachesSchema.statics.findUserByCredentials = async (phoneNumber, password) => {
   return user
 }
 
-// coachesSchema.statics.findUserById = async (id) => {
-//   const user = await Coach.findById(id);
-//   if(!user) {
-//     throw new BadRequestException("No coach found.");
-//   }
-//   return user;
-// }
+coachesSchema.statics.updateCoach = async function(coachId, updateData) {
+  const existingCoach = await this.findById(coachId);
+  if(!existingCoach) {
+    throw new Error("Coach not found");
+  }
+
+  const coach = new this({
+    _id: coachId,
+    phoneNumber: existingCoach.phoneNumber,
+    password: existingCoach.password,
+    firstName: updateData.firstName || existingCoach.firstName,
+    lastName: updateData.lastName || existingCoach.lastName,
+    trainingPlanPrice: updateData.trainingPlanPrice || existingCoach.trainingPlanPrice,
+    dietPlanPrice: updateData.dietPlanPrice || existingCoach.dietPlanPrice,
+  });
+
+  await this.updateOne({ _id: coachId }, coach);
+  return this.findById(coachId);
+}
 
 coachesSchema.pre("save", async function (req, res, next) {
   const user = this;
@@ -81,14 +93,6 @@ coachesSchema.pre("save", async function (req, res, next) {
 
 const Coach = mongoose.model("Coach", coachesSchema);
 
-// coachesSchema.methods.toJSON = function() {
-//   const user = this;
-//   const userObject = user.toObject();
-
-//   delete userObject.password;
-
-//   return userObject;
-// }
 
 // ------------------- Profile model ------------------- //
 const profileSchema = new mongoose.Schema({
