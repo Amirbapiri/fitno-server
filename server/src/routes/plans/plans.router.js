@@ -4,7 +4,7 @@ const express = require("express");
 const multer = require("multer");
 
 const auth = require("./../../middleware/auth");
-const { httpPostSendTrainingPlan } = require("./plans.controller");
+const { httpCreateWorkoutPlan, httpGetWorkoutPlan, httpDeletePlanById } = require("./plans.controller");
 
 const plansRouter = express.Router();
 
@@ -14,6 +14,10 @@ const uploadMiddleWare = multer({
 });
 
 
-plansRouter.post("/training/send", auth, uploadMiddleWare.single("trainingPlan"), httpPostSendTrainingPlan);
+// plansRouter.post("/training/send", auth, uploadMiddleWare.single("trainingPlan"), httpPostSendTrainingPlan);
+plansRouter.get("/:requestId", auth, httpGetWorkoutPlan);
+plansRouter.post("/:requestId/create", auth, httpCreateWorkoutPlan);
+plansRouter.get("/:planId/delete", auth, httpDeletePlanById);
 
 module.exports = plansRouter;
+

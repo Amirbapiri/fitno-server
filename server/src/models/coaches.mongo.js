@@ -44,6 +44,10 @@ const coachesSchema = new mongoose.Schema({
   },
   avatar: {
     type: Buffer,
+  },
+  wallet: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Wallet",
   }
 }, { timestamps: true });
 
