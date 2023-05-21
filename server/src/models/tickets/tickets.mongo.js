@@ -74,6 +74,17 @@ ticketSchema.statics.updateTicket = async function(ticketId, updates) {
   }
 }
 
+ticketSchema.statics.getAllTicketsByCoachId = async function(coachId) {
+  const Ticket = this;
+
+  try {
+    const tickets = await Ticket.find({coach: coachId});
+    return tickets;
+  } catch(err) {
+    throw new Error("Error in getting all tickets for coach");
+  }
+}
+
 const Ticket = mongoose.model('Ticket', ticketSchema);
 
 module.exports = Ticket;
