@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const Ticket = require('../models/ticket');
+const Ticket = require('../../models/tickets/tickets.mongo');
 
 
 const httpSubmitNewTicket = async (req, res) => {
   try {
     const { subject, description, priority } = req.body;
-    const coach = req.user._id; // assuming the coach's user ID is stored in req.user
+    const coach = req.user; // assuming the coach's user ID is stored in req.user
 
-    const ticket = await Ticket.createTicket(subject, description, priority, coach);
+    const ticket = await Ticket.createTicket(coach, subject, description, priority);
     res.status(201).json({ message: 'Ticket created successfully', ticket });
   } catch (err) {
     res.status(500).json({ message: 'Error creating ticket', error: err.message });
@@ -41,8 +41,30 @@ const httpUpdateTicket = async (req, res) => {
   }
 }
 
+const httpGetAllTicketsByCoachId = async (req, res) => {
+  const { coachId } = req.params;
+  try {
+    const tickets = await Ticket.getAllTicketsByCoachId(coachId);
+    res.json(tickets);
+  } catch(err) {
+    return res.status(400).json({message: err.message})
+  }
+}
+
+const httpGetTicketById = async (req, res) => {
+  const { ticketId } = req.params;
+  try{
+    const ticket = await Ticket.findOne({_id: ticketId});
+    return res.json(ticket);
+  } catch (err) {
+    return res.status(404).json({message: err.message});
+  }
+}
+
 module.exports = {
   httpSubmitNewTicket,
   httpCloseTicket,
   httpUpdateTicket,
+  httpGetAllTicketsByCoachId,
+  httpGetTicketById,
 }

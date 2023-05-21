@@ -1,13 +1,15 @@
-const express = require('express');
+const express = require("express");
 const ticketsRouter = express.Router();
 
-const { auth } = require("./../../middleware/auth");
-const { httpSubmitNewTicket, httpCloseTicket } = require("./../tickets/tickets.controllers");
+const auth = require("./../../middleware/auth");
+const { httpSubmitNewTicket, httpCloseTicket, httpUpdateTicket, httpGetAllTicketsByCoachId, httpGetTicketById } = require("./../tickets/tickets.controllers");
 
 
+ticketsRouter.get("/:ticketId", auth, httpGetTicketById);
+ticketsRouter.put("/:ticketId/close", auth, httpCloseTicket);
 ticketsRouter.post("/submit", auth, httpSubmitNewTicket);
-ticketsRouter.post("/close/:ticketId", auth, httpCloseTicket);
 ticketsRouter.put("/:ticketId/update", auth, httpUpdateTicket);
+ticketsRouter.get("/:coachId/all", auth, httpGetAllTicketsByCoachId);
 
 
 module.exports = ticketsRouter; 
