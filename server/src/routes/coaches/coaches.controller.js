@@ -13,6 +13,16 @@ const httpGetAllCoaches = async (req, res) => {
   return res.status(200).json(coaches);
 }
 
+const httpDeleteCoach = async (req, res) => {
+  const { coachId } = req.params;
+  try {
+    const deletedCoach = await Coach.deleteById(coachId);
+    return json.status(204).json();
+  } catch(err) {
+    return res.status(400).json({message: err.message});
+  }
+}
+
 const httpPostCoachSignup = async (req, res) => {
   const { phoneNumber, password } = req.body;
   const existingUser = await getCoachByPhoneNumber(phoneNumber);
@@ -37,7 +47,7 @@ const httpPostCoachSignup = async (req, res) => {
 const httpPostCoachSignIn = async (req, res) => {
   const { phoneNumber, password } = req.body;
   try {
-    const user = await Coach.findOne({ phoneNumber }, { __v: 0 });
+    const user = await Coach.findOne({ phoneNumber }, { __v: 0, avatar: 0 });
     if (!user) {
       return res.status(404).send({ msg: "Unable to login, Invalid Credentials." });
     }
@@ -165,6 +175,7 @@ const httpDeleteMyAvatar = async (req, res) => {
 
 module.exports = {
   httpGetAllCoaches,
+  httpDeleteCoach,
   httpPostCoachSignup,
   httpPostCoachSignIn,
   httpCheckIfTokenIsValid,

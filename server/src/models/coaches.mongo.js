@@ -83,6 +83,18 @@ coachesSchema.statics.updateCoach = async function(coachId, updateData) {
   return this.findById(coachId);
 }
 
+coachesSchema.statics.deleteById = async function(coachId) {
+  try {
+    const deletedCoach = await Coach.findOneAndDelete(coachId);
+    if(!deletedCoach) {
+      throw new Error("Coach not found");
+    }
+    return deletedCoach;
+  } catch(err) {
+    throw new Error("Error in deleteing coach");
+  }
+}
+
 coachesSchema.pre("save", async function (req, res, next) {
   const user = this;
   if (user.isModified("password")) {

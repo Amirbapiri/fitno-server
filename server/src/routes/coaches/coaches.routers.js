@@ -7,6 +7,7 @@ require("dotenv").config();
 
 const {
   httpGetAllCoaches,
+  httpDeleteCoach,
   httpPostCoachSignup,
   httpPostCoachSignIn,
   httpCheckIfTokenIsValid,
@@ -28,6 +29,7 @@ const uploadMiddleWare = multer({
 
 
 coachesRouter.get("/", auth, httpGetAllCoaches);
+coachesRouter.get("/delete", auth, httpDeleteCoach);
 coachesRouter.get("/profile", auth, httpGetUserData);
 coachesRouter.patch("/profile", auth, httpUpdateUserData);
 coachesRouter.post("/auth/signup", httpPostCoachSignup);
