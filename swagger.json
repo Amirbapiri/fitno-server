@@ -1,0 +1,9 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fitno API Documenation",
+    "version": "1.0.0",
+    "description": "Fitno is a fitness tracking application that allows users to monitor their workouts, track their progress, and analyze their fitness data. This API documentation provides detailed information about the Fitno API endpoints and how to interact with them."
+  },
+  "paths": {}
+}
