@@ -1,0 +1,354 @@
+[
+  {
+    "path": "/v1/coaches",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "auth",
+      "httpGetAllCoaches"
+    ]
+  },
+  {
+    "path": "/v1/coaches/delete",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "auth",
+      "httpDeleteCoach"
+    ]
+  },
+  {
+    "path": "/v1/coaches/profile",
+    "methods": [
+      "GET",
+      "PATCH"
+    ],
+    "middlewares": [
+      "auth",
+      "httpGetUserData"
+    ]
+  },
+  {
+    "path": "/v1/coaches/auth/signup",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "httpPostCoachSignup"
+    ]
+  },
+  {
+    "path": "/v1/coaches/auth/sign-in",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "httpPostCoachSignIn"
+    ]
+  },
+  {
+    "path": "/v1/coaches/auth/verification",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "httpCheckIfTokenIsValid"
+    ]
+  },
+  {
+    "path": "/v1/coaches/auth/sign-out",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "auth",
+      "httpPostCoachSignOut"
+    ]
+  },
+  {
+    "path": "/v1/coaches/avatar",
+    "methods": [
+      "PUT"
+    ],
+    "middlewares": [
+      "auth",
+      "multerMiddleware",
+      "httpUpdateUserAvatar"
+    ]
+  },
+  {
+    "path": "/v1/coaches/avatar/:id/",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "httpGetMyAvatar"
+    ]
+  },
+  {
+    "path": "/v1/coaches/avatar/me/delete",
+    "methods": [
+      "DELETE"
+    ],
+    "middlewares": [
+      "auth",
+      "httpDeleteMyAvatar"
+    ]
+  },
+  {
+    "path": "/v1/coaches/requests/all",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "auth",
+      "httpGetAllRequests"
+    ]
+  },
+  {
+    "path": "/v1/coaches/requests/:id",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "auth",
+      "httpGetSingleRequest"
+    ]
+  },
+  {
+    "path": "/v1/clients/auth/signup",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "httpPostClientSignUp"
+    ]
+  },
+  {
+    "path": "/v1/clients/auth/sign-in",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "httpPostClientSignIn"
+    ]
+  },
+  {
+    "path": "/v1/clients/auth/verification",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "httpCheckIfTokenIsValid"
+    ]
+  },
+  {
+    "path": "/v1/clients/profile",
+    "methods": [
+      "GET",
+      "PATCH"
+    ],
+    "middlewares": [
+      "auth",
+      "httpGetUserData"
+    ]
+  },
+  {
+    "path": "/v1/clients/avatar",
+    "methods": [
+      "PUT"
+    ],
+    "middlewares": [
+      "auth",
+      "multerMiddleware",
+      "httpUpdateUserAvatar"
+    ]
+  },
+  {
+    "path": "/v1/clients/avatar/:id/",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "httpGetMyAvatar"
+    ]
+  },
+  {
+    "path": "/v1/clients/avatar/me/delete",
+    "methods": [
+      "DELETE"
+    ],
+    "middlewares": [
+      "auth",
+      "httpDeleteMyAvatar"
+    ]
+  },
+  {
+    "path": "/v1/clients/auth/sign-out",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "auth",
+      "httpPostClientSignOut"
+    ]
+  },
+  {
+    "path": "/v1/clients/requests/send",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "auth",
+      "httpPostSendRequest"
+    ]
+  },
+  {
+    "path": "/v1/clients/requests/all",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "auth",
+      "httpGetAllRequests"
+    ]
+  },
+  {
+    "path": "/v1/requests/send",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "auth",
+      "httpPostSendRequest"
+    ]
+  },
+  {
+    "path": "/v1/requests/all",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "auth",
+      "httpGetAllRequests"
+    ]
+  },
+  {
+    "path": "/v1/plans/:requestId",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "auth",
+      "httpGetWorkoutPlan"
+    ]
+  },
+  {
+    "path": "/v1/plans/:requestId/create",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "auth",
+      "httpCreateWorkoutPlan"
+    ]
+  },
+  {
+    "path": "/v1/plans/:planId/delete",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "auth",
+      "httpDeletePlanById"
+    ]
+  },
+  {
+    "path": "/v1/tickets/:ticketId",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "auth",
+      "httpGetTicketById"
+    ]
+  },
+  {
+    "path": "/v1/tickets/:ticketId/close",
+    "methods": [
+      "PUT"
+    ],
+    "middlewares": [
+      "auth",
+      "httpCloseTicket"
+    ]
+  },
+  {
+    "path": "/v1/tickets/submit",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "auth",
+      "httpSubmitNewTicket"
+    ]
+  },
+  {
+    "path": "/v1/tickets/:ticketId/update",
+    "methods": [
+      "PUT"
+    ],
+    "middlewares": [
+      "auth",
+      "httpUpdateTicket"
+    ]
+  },
+  {
+    "path": "/v1/tickets/:coachId/all",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "auth",
+      "httpGetAllTicketsByCoachId"
+    ]
+  },
+  {
+    "path": "/v1/exercises",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "httpGetAllExercises"
+    ]
+  },
+  {
+    "path": "/v1/exercises/add",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "httpPostNewExercise"
+    ]
+  },
+  {
+    "path": "/v1/exercises/add/bulk",
+    "methods": [
+      "POST"
+    ],
+    "middlewares": [
+      "httpPostNewExerciseBulk"
+    ]
+  },
+  {
+    "path": "/v1/exercises/search",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "httpPostSearchExercises"
+    ]
+  }
+]
