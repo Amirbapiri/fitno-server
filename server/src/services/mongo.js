@@ -9,7 +9,7 @@ mongoose.connection.on("error", (err) => {
 });
 
 async function mongoConnect() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/fitnodb", {
+  await mongoose.connect("mongodb://db:27017/fitnodb", {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
